@@ -1,14 +1,12 @@
 import React from 'react';
-import Home from './components/home'
-import Saved from './components/saved'
+import Home from './containers/home'
+import Saved from './containers/saved'
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 
 import './App.css';
-import {SelectionProvider} from "./components/selection-context";
 
 export default function App() {
     return (
-        <SelectionProvider>
             <Router>
                 <div>
                     <Switch>
@@ -21,6 +19,5 @@ export default function App() {
                     </Switch>
                 </div>
             </Router>
-        </SelectionProvider>
     );
 }

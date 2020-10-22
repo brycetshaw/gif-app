@@ -1,29 +1,27 @@
 import React, {useState, useEffect} from 'react'
 import { Form, Button} from "react-bootstrap";
+import {fetchGifs} from "../lib/gifSearch";
 
-
-const useSearchGifs = (baseUrl) => {
+const useSearchGifs = () => {
     const [searchParams, setSearchParams] = useState('pedro')
     const [gifsArray, setGifsArray] = useState([])
-    const [isLoading, setLoading] = useState(false)
-
 
     useEffect(() => {
-        (async () => {
-            if(searchParams.length > 0) {
-                setLoading(true)
 
-                const targetUrl = (query) => `${baseUrl}search?q=${query}`
-                const response = await fetch(targetUrl(searchParams));
-                const data = await response.json()
-                console.log(data);
-                setGifsArray(data.data)
-                setLoading(false)
-            }
-        })()
+        if(searchParams.trim() === '') {
+            return
+        }
 
-    }, [searchParams, baseUrl])
+        fetchGifs(searchParams)
+            .then(res => {
+                console.log(res)
+                return res
+                }
+            )
+            .then(res => setGifsArray(res))
+            .catch(err => console.log(err));
 
+    }, [searchParams,])
 
     const SearchGifs = () => {
         const [formText, setFormText] = useState('')
@@ -46,8 +44,7 @@ const useSearchGifs = (baseUrl) => {
             </Form>
         );
     }
-
-    return {gifsArray, isLoading, SearchGifs};
+    return {gifsArray, SearchGifs};
 }
 
 export default useSearchGifs;
