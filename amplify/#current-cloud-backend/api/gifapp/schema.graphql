@@ -1,4 +1,0 @@
-type Selection @model @auth(rules: [{ allow: owner }]) {
-  id: ID!
-  object: AWSJSON
-}
