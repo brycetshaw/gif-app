@@ -1,14 +1,9 @@
 import Gallery from "react-photo-gallery";
-import React, {useCallback, useEffect} from "react";
-import {useSelector} from "react-redux";
+import React, {useCallback} from "react";
+
 import GifItem from "./gifItem";
 
-
-
 const GifArea = ({gifs}) => {
-
-
-
     const imageRenderer = useCallback(
         ({index, left, top, key, photo, isSelected}) => (
             <GifItem
@@ -25,9 +20,11 @@ const GifArea = ({gifs}) => {
     );
 
     return (
-
         <div>
-            <Gallery photos={gifs} renderImage={imageRenderer} />
+            <Gallery
+                photos={gifs}
+                renderImage={imageRenderer}
+            />
         </div>
     )
 }

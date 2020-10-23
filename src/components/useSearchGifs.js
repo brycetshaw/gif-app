@@ -1,30 +1,29 @@
 import React, {useState, useEffect} from 'react'
 import { Form, Button} from "react-bootstrap";
 import {fetchGifs} from "../lib/gifSearch";
-
-const useSearchGifs = () => {
-    const [searchParams, setSearchParams] = useState('pedro')
-    const [gifsArray, setGifsArray] = useState([])
-
-    useEffect(() => {
-
-        if(searchParams.trim() === '') {
-            return
-        }
-
-        fetchGifs(searchParams)
-            .then(res => {
-                console.log(res)
-                return res
-                }
-            )
-            .then(res => setGifsArray(res))
-            .catch(err => console.log(err));
-
-    }, [searchParams,])
+import {useDispatch, useSelector} from "react-redux";
+import {setResultsAction} from "../reducers/rootReducer";
 
     const SearchGifs = () => {
-        const [formText, setFormText] = useState('')
+        const [searchParams, setSearchParams] = useState(useSelector(state => state.searchParams))
+        const dispatch = useDispatch();
+
+        const [formText, setFormText] = useState(useSelector(state => state.searchParams))
+
+        useEffect(() => {
+            if(searchParams.trim() === '') {
+                return
+            }
+            const setResults = (results) => dispatch(setResultsAction(results));
+            fetchGifs(searchParams)
+                .then(res => setResults({
+                    results:res,
+                    searchParams:searchParams
+                }))
+                .catch(err => console.log(err));
+        }, [searchParams, dispatch])
+
+
 
         const handleSubmit = (e) => {
             e.preventDefault();
@@ -36,16 +35,15 @@ const useSearchGifs = () => {
             setFormText(val);
         }
         return (
-            <Form onSubmit={handleSubmit} inline>
+            <Form id="search-input" onSubmit={handleSubmit} onKeyDown={(e) => (e.key === "Enter") ? handleSubmit(e) :''} inline>
                 <>
-                    <Form.Control type='text' placeholder="Search" onChange={handleChange}/>
+                    <Form.Control type='text' placeholder={(formText === '') ? 'Search' : formText} onChange={handleChange}/>
                     <Button variant='primary' type='submit'>Search</Button>
                 </>
             </Form>
         );
     }
-    return {gifsArray, SearchGifs};
-}
 
-export default useSearchGifs;
+
+export default SearchGifs;
 

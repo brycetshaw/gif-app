@@ -1,6 +1,6 @@
 const baseUrl = 'https://knowhow-react-challenge.prod.with-datafire.io/gif/';
 const transformResponse = (e) => {
-    const target = e.images.original;
+    const target = e.images.downsized_large;
     return {
         src: target.url,
         width: parseInt(target.width),
