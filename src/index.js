@@ -8,7 +8,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {Provider} from 'react-redux'
 
 import store from "./store";
+import awsmobile from "./aws-exports";
+import Amplify from 'aws-amplify'
 
+Amplify.configure(awsmobile);
 
 
 ReactDOM.render(

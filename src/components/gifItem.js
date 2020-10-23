@@ -1,7 +1,7 @@
-import React, {Suspense, useEffect, useState} from "react";
+import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {addSavedAction, removeSavedAction} from "../reducers/rootReducer";
-import {SuspenseImg} from "./suspenseImg";
+import {Figure} from "react-bootstrap";
 
 const Checkmark = ({selected}) => (
     <div
@@ -57,13 +57,9 @@ const GifItem = ({
     const [isSelected, setIsSelected] = useState(saved.some(val => val.key === photo.key));
     const dispatch = useDispatch();
 
-
-    useEffect(() => {
-        console.log(saved)
-    }, [saved])
-
     const addSaved = (photo) => dispatch(addSavedAction(photo))
     const removeSaved = (photo) => dispatch(removeSavedAction(photo))
+
     //calculate x,y scale
     const sx = (100 - (30 / photo.width) * 100) / 100;
     const sy = (100 - (30 / photo.height) * 100) / 100;
@@ -84,41 +80,41 @@ const GifItem = ({
         }
     };
 
-    // useEffect(() => {
-    //     if (isSelected) {
-    //         addSaved(photo)
-    //     } else {
-    //         removeSaved(photo)
-    //     }
-    // }, [isSelected]);
-    // const MemoImg = useMemo()
 
     return (
         <div
-            style={{margin, height: photo.height, width: photo.width, ...cont}}
+            style={{margin, height: photo.height + 60, width: photo.width, ...cont, backgroundColor: "lightskyblue"}}
             className={!isSelected ? "not-selected" : ""}
         >
             <Checkmark selected={isSelected}/>
-            {/*<Suspense fallback={<div>LLoading</div>}>*/}
-
-            {/*    <SuspenseImg*/}
-            {/*        alt={photo.title}*/}
-            {/*        style={*/}
-            {/*            isSelected ? {...imgStyle, ...selectedImgStyle} : {...imgStyle}*/}
-            {/*        }*/}
-            {/*        {...photo}*/}
-            {/*        onClick={handleOnClick}*/}
-            {/*    />*/}
-            {/*</Suspense>*/}
-
-            <img
-                alt={photo.title}
-                style={
-                    isSelected ? {...imgStyle, ...selectedImgStyle} : {...imgStyle}
-                }
-                {...photo}
-                onClick={handleOnClick}
-            />
+            <Figure>
+                <Figure.Image
+                    style={isSelected ? {...imgStyle, ...selectedImgStyle} : {...imgStyle}}
+                    width={photo.width}
+                    height={photo.height}
+                    alt={photo.title}
+                    src={photo.src}
+                    onClick={handleOnClick}
+                />
+                <Figure.Caption>
+                    {`title: ${photo.title}`}
+                    <br/>
+                    {`username: ${photo.username}`}
+                </Figure.Caption>
+            </Figure>
+            {/*<img*/}
+            {/*    alt={photo.title}*/}
+            {/*    style={*/}
+            {/*        isSelected ? {...imgStyle, ...selectedImgStyle} : {...imgStyle}*/}
+            {/*    }*/}
+            {/*    {...photo}*/}
+            {/*    onClick={handleOnClick}*/}
+            {/*/>*/}
+            {/*<figcaption className="figure-caption font-italic font-weight-bold">*/}
+            {/*    {photo.title}*/}
+            {/*    <br/>*/}
+            {/*    {photo.username}*/}
+            {/*</figcaption>*/}
             <style>{`.not-selected:hover{outline:2px solid #06befa}`}</style>
         </div>
     );

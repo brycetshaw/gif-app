@@ -1,0 +1,149 @@
+type Selection {
+  id: ID!
+  object: AWSJSON
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  owner: String
+}
+
+enum ModelSortDirection {
+  ASC
+  DESC
+}
+
+type ModelSelectionConnection {
+  items: [Selection]
+  nextToken: String
+}
+
+input ModelStringInput {
+  ne: String
+  eq: String
+  le: String
+  lt: String
+  ge: String
+  gt: String
+  contains: String
+  notContains: String
+  between: [String]
+  beginsWith: String
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  size: ModelSizeInput
+}
+
+input ModelIDInput {
+  ne: ID
+  eq: ID
+  le: ID
+  lt: ID
+  ge: ID
+  gt: ID
+  contains: ID
+  notContains: ID
+  between: [ID]
+  beginsWith: ID
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  size: ModelSizeInput
+}
+
+input ModelIntInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelFloatInput {
+  ne: Float
+  eq: Float
+  le: Float
+  lt: Float
+  ge: Float
+  gt: Float
+  between: [Float]
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelBooleanInput {
+  ne: Boolean
+  eq: Boolean
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelSizeInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+}
+
+input ModelSelectionFilterInput {
+  id: ModelIDInput
+  object: ModelStringInput
+  and: [ModelSelectionFilterInput]
+  or: [ModelSelectionFilterInput]
+  not: ModelSelectionFilterInput
+}
+
+enum ModelAttributeTypes {
+  binary
+  binarySet
+  bool
+  list
+  map
+  number
+  numberSet
+  string
+  stringSet
+  _null
+}
+
+type Query {
+  getSelection(id: ID!): Selection
+  listSelections(filter: ModelSelectionFilterInput, limit: Int, nextToken: String): ModelSelectionConnection
+}
+
+input CreateSelectionInput {
+  id: ID
+  object: AWSJSON
+}
+
+input UpdateSelectionInput {
+  id: ID!
+  object: AWSJSON
+}
+
+input DeleteSelectionInput {
+  id: ID
+}
+
+type Mutation {
+  createSelection(input: CreateSelectionInput!, condition: ModelSelectionConditionInput): Selection
+  updateSelection(input: UpdateSelectionInput!, condition: ModelSelectionConditionInput): Selection
+  deleteSelection(input: DeleteSelectionInput!, condition: ModelSelectionConditionInput): Selection
+}
+
+input ModelSelectionConditionInput {
+  object: ModelStringInput
+  and: [ModelSelectionConditionInput]
+  or: [ModelSelectionConditionInput]
+  not: ModelSelectionConditionInput
+}
+
+type Subscription {
+  onCreateSelection(owner: String!): Selection @aws_subscribe(mutations: ["createSelection"])
+  onUpdateSelection(owner: String!): Selection @aws_subscribe(mutations: ["updateSelection"])
+  onDeleteSelection(owner: String!): Selection @aws_subscribe(mutations: ["deleteSelection"])
+}

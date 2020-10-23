@@ -8,8 +8,10 @@ const transformResponse = (e) => {
         ...target,
         key: e.id,
         title: e.title,
+        username:e.username
     }
 }
+
 export const fetchGifs = async (searchParams) => {
 
     const targetUrl = (query) => `${baseUrl}search?q=${query}`
@@ -19,9 +21,8 @@ export const fetchGifs = async (searchParams) => {
         return json;
     })()
         .then(res => {
+            console.log(res)
             return res.data.map(transformResponse)})
-    // console.log(response)
     return parsedResponse
-
 }
 
