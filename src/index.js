@@ -5,20 +5,19 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import {Provider} from 'react-redux'
+import { Provider } from 'react-redux';
 
-import store from "./store";
+import store from './store';
 // import awsmobile from "./aws-exports";
 // import Amplify from 'aws-amplify'
 //
 // Amplify.configure(awsmobile);
 
-
 ReactDOM.render(
-      <Provider store={store}>
-          <App />
-      </Provider>,
-  document.getElementById('root')
+    <Provider store={store}>
+        <App />
+    </Provider>,
+    document.getElementById('root')
 );
 
 // If you want your app to work offline and load faster, you can change
@@ -26,6 +25,6 @@ ReactDOM.render(
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
 
-if(window.Cypress) {
+if (window.Cypress) {
     window.store = store;
 }

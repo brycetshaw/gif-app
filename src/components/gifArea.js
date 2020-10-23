@@ -1,15 +1,15 @@
-import Gallery from "react-photo-gallery";
-import React, {useCallback} from "react";
+import Gallery from 'react-photo-gallery';
+import React, { useCallback } from 'react';
 
-import GifItem from "./gifItem";
+import GifItem from './gifItem';
 
-const GifArea = ({gifs}) => {
+const GifArea = ({ gifs }) => {
     const imageRenderer = useCallback(
-        ({index, left, top, key, photo, isSelected}) => (
+        ({ index, left, top, key, photo, isSelected }) => (
             <GifItem
                 selected={isSelected}
                 key={key}
-                margin={"2px"}
+                margin={'2px'}
                 index={index}
                 photo={photo}
                 left={left}
@@ -21,11 +21,8 @@ const GifArea = ({gifs}) => {
 
     return (
         <div>
-            <Gallery
-                photos={gifs}
-                renderImage={imageRenderer}
-            />
+            <Gallery photos={gifs} renderImage={imageRenderer} />
         </div>
-    )
-}
+    );
+};
 export default GifArea;

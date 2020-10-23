@@ -8,21 +8,19 @@ const transformResponse = (e) => {
         ...target,
         key: e.id,
         title: e.title,
-        username:e.username
-    }
-}
+        username: e.username,
+    };
+};
 
 export const fetchGifs = async (searchParams) => {
-
-    const targetUrl = (query) => `${baseUrl}search?q=${query}`
+    const targetUrl = (query) => `${baseUrl}search?q=${query}`;
     const parsedResponse = (async () => {
-        const response = await fetch(targetUrl(searchParams))
+        const response = await fetch(targetUrl(searchParams));
         const json = await response.json();
         return json;
-    })()
-        .then(res => {
-            // console.log(res)
-            return res.data.map(transformResponse)})
-    return parsedResponse
-}
-
+    })().then((res) => {
+        // console.log(res)
+        return res.data.map(transformResponse);
+    });
+    return parsedResponse;
+};
