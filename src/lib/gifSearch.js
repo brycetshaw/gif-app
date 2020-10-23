@@ -21,7 +21,7 @@ export const fetchGifs = async (searchParams) => {
         return json;
     })()
         .then(res => {
-            console.log(res)
+            // console.log(res)
             return res.data.map(transformResponse)})
     return parsedResponse
 }
