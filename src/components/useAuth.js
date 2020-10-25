@@ -4,7 +4,7 @@ import { Auth, Hub } from 'aws-amplify';
 import { useDispatch } from 'react-redux';
 import { addAPIStateAction } from '../reducers/rootReducer';
 
-import { getAPIState } from '../lib/appSyncService';
+import { fetchGifs } from '../lib/appSyncService';
 
 const checkUser = () => {
     Auth.currentAuthenticatedUser()
@@ -23,7 +23,7 @@ const AuthButton = () => {
             if (payload.event === 'signIn') {
                 console.log('sign in');
 
-                getAPIState()
+                fetchGifs()
                     .then(addAPIState)
                     .catch((err) => console.log(err));
             }

@@ -8,10 +8,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Provider } from 'react-redux';
 
 import store from './store';
-// import awsmobile from "./aws-exports";
-// import Amplify from 'aws-amplify'
-//
-// Amplify.configure(awsmobile);
+import awsmobile from './aws-exports';
+import Amplify from 'aws-amplify';
+
+awsmobile.oauth.redirectSignIn = `${window.location.origin}/`;
+awsmobile.oauth.redirectSignOut = `${window.location.origin}/`;
+Amplify.configure(awsmobile);
 
 ReactDOM.render(
     <Provider store={store}>

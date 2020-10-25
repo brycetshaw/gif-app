@@ -1,0 +1,11 @@
+{
+    "AppSyncApiName": "gifapp",
+    "DynamoDBBillingMode": "PAY_PER_REQUEST",
+    "DynamoDBEnableServerSideEncryption": false,
+    "AuthCognitoUserPoolId": {
+        "Fn::GetAtt": [
+            "authgifappd7996235",
+            "Outputs.UserPoolId"
+        ]
+    }
+}

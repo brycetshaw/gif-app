@@ -1,25 +1,19 @@
 {
   "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-gifapp-dev-234359-authRole",
-      "UnauthRoleArn": "arn:aws:iam::285091344673:role/amplify-gifapp-dev-234359-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::285091344673:role/amplify-gifapp-dev-234359-authRole",
+      "AuthRoleName": "amplify-gifapp-dev-230035-authRole",
+      "UnauthRoleArn": "arn:aws:iam::285091344673:role/amplify-gifapp-dev-230035-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::285091344673:role/amplify-gifapp-dev-230035-authRole",
       "Region": "us-west-2",
-      "DeploymentBucketName": "amplify-gifapp-dev-234359-deployment",
-      "UnauthRoleName": "amplify-gifapp-dev-234359-unauthRole",
-      "StackName": "amplify-gifapp-dev-234359",
-      "StackId": "arn:aws:cloudformation:us-west-2:285091344673:stack/amplify-gifapp-dev-234359/c119d970-14f2-11eb-a2c6-0ad25b3e6aaf",
-      "AmplifyAppId": "d9uspr61mfa8f"
+      "DeploymentBucketName": "amplify-gifapp-dev-230035-deployment",
+      "UnauthRoleName": "amplify-gifapp-dev-230035-unauthRole",
+      "StackName": "amplify-gifapp-dev-230035",
+      "StackId": "arn:aws:cloudformation:us-west-2:285091344673:stack/amplify-gifapp-dev-230035/06381b10-167f-11eb-b9c9-0a1fe4a0f4d9",
+      "AmplifyAppId": "d2ywe09girili1"
     },
     "categories": {
-      "hosting": {
-        "amplifyhosting": {
-          "appId": "d9uspr61mfa8f",
-          "type": "cicd"
-        }
-      },
       "auth": {
-        "gifapp89afca2c": {
+        "gifappd7996235": {
           "hostedUIProviderCreds": "[{\"ProviderName\":\"Facebook\",\"client_id\":\"630864167604869\",\"client_secret\":\"dcde9f780cd2f68c017253c4c75480ea\"}]"
         }
       }

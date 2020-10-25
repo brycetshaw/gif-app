@@ -1,0 +1,17 @@
+type Gif
+@model
+@auth( rules: [{ allow: owner}]) {
+  id: ID!
+  height:Int!
+  width:Int!
+  title: String
+  username:String
+  src:String!
+  comments: [Comment] @connection(name:"GifComments")
+}
+type Comment @model {
+  id: ID!
+  gif: Gif! @connection(name: "GifComments")
+  poster:String!
+  content: String!
+}

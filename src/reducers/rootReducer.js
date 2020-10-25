@@ -8,7 +8,7 @@ const initialState = {
 //Types
 export const GIF_ADD = 'GIF_ADD';
 export const GIF_REMOVE = 'GIF_REMOVE';
-// export const API_UPDATE = 'API_UPDATE'
+export const API_UPDATE = 'API_UPDATE';
 export const RESULTS_SET = 'RESULTS_SET';
 
 //Actions
@@ -19,7 +19,7 @@ export const removeSavedAction = (val) => ({
 });
 export const setResultsAction = (val) => ({ type: RESULTS_SET, payload: val });
 
-// export const addAPIStateAction = (val) => ({type:API_UPDATE, payload: val})
+export const addAPIStateAction = (val) => ({ type: API_UPDATE, payload: val });
 
 const reducer = (state = initialState, { type, payload }) => {
     switch (type) {
@@ -42,12 +42,12 @@ const reducer = (state = initialState, { type, payload }) => {
                 searchParams: payload.searchParams,
             };
         }
-        // case API_UPDATE: {
-        //     return {
-        //         ...state,
-        //         saved: R.union(state.saved, payload)
-        //     }
-        // }
+        case API_UPDATE: {
+            return {
+                ...state,
+                saved: R.union(state.saved, payload),
+            };
+        }
         default:
             return state;
     }
